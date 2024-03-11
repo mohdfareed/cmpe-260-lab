@@ -119,6 +119,9 @@ The final step in testing the Instruction Fetch stage was to verify its function
 \end{figure}
 
 The ModelSim simulation results demonstrate the successful functionality of the Instruction Fetch stage. The waveform shows identical behavior to the behavioral and post-implementation timing simulations, confirming the module's ability to fetch instructions from the Instruction Memory and increment the program counter sequentially.
+\\
+
+Out-of-bounds access was also tested by modifying the PC port of the Instruction Fetch module to access instructions beyond the 1020 to 1023 instruction then using assert statements to verify that the module returns zeros for out-of-bounds access. The indices tested were 1022, which is partially out of range, and 1024, which is completely out of range. The module correctly returned zeros for the out-of-bounds access, without resulting in any errors or warnings due to the assert statements.
 
 \subsection*{Instruction Decode Testing}
 
@@ -162,11 +165,11 @@ Post-implementation timing simulation was then performed to evaluate the module'
     \label{fig:implement_decode}
 \end{figure}
 
-The timing simulation results shown above demonstrate the module's compliance with timing and functional requirements. The simulation shows response times well within the specified clock cycle. It also shows an average delay of 3ns for the module to decode an instruction into control signals and register data.
+The timing simulation results shown above demonstrate the module's compliance with timing and functional requirements. The simulation shows response times well within the specified clock cycle. It also shows an average delay of 1.5ns for the module to decode an instruction into control signals and register data.
 
 \section*{Conclusion}
 
-The design and implementation of the Instruction Fetch and Decode stages for a pipelined MIPS architecture were successfully completed. The Instruction Fetch stage was designed to fetch program instructions from memory, incrementing the program counter sequentially and responding to reset conditions. The Instruction Decode stage was designed to parse the fetched instructions into control signals and register data for the Execute stage. Both stages were tested through behavioral simulations, post-implementation timing simulations, and ModelSim waveform simulations, demonstrating successful functionality and compliance with hardware specifications. The results of the simulations confirmed the correct operation of the Instruction Fetch and Decode stages, with delays within the expected range, ensuring the design's performance and timing. The hardware demonstration on the Basys3 FPGA platform verified the operational integrity and compliance with design requirements.
+The design and implementation of the Instruction Fetch and Decode stages for a pipelined MIPS architecture were successfully completed. The Instruction Fetch stage was designed to fetch program instructions from memory, incrementing the program counter sequentially and responding to reset conditions. The Instruction Decode stage was designed to parse the fetched instructions into control signals and register data for the Execute stage. Both stages were tested through behavioral simulations, post-implementation timing simulations, and ModelSim waveform simulations, demonstrating successful functionality and compliance with hardware specifications. The results of the simulations confirmed the correct operation of the Instruction Fetch and Decode stages, with delays within the expected range, ensuring the design's performance and timing.
 
 \newpage
 \includepdf[pages=-]{signoff.pdf}
